@@ -1,6 +1,6 @@
 const mainContainer = document.getElementById("main-container");
 const bookMain = document.createElement("div");
-mainContainer.appendChild(bookMain).classList.add("book-main");
+mainContainer.appendChild(bookMain).classList.add("library-main");
 
 var titleValue = document.getElementById("title");
 var authorValue = document.getElementById("author");
@@ -44,15 +44,19 @@ function createBookContainer(title, author, pages) {
   const deleteButton = document.createElement("button");
   const statusButton = document.createElement("button");
   const updateButton = document.createElement("button");
+  const contentContainer = document.createElement("div");
+  const buttonContainer = document.createElement("div");
 
   bookMain.appendChild(bookContainer).classList.add(`book-${countBooks}`);
-  bookContainer.appendChild(titleBook).classList.add(`title-${countBooks}`);
-  bookContainer.appendChild(authorBook).classList.add(`author-${countBooks}`);
-  bookContainer.appendChild(pagesBook).classList.add(`pages-${countBooks}`);
-  bookContainer.appendChild(readBook).classList.add(`read-${countBooks}`);
-  bookContainer.appendChild(deleteButton);
-  bookContainer.appendChild(statusButton);
-  bookContainer.appendChild(updateButton).classList.add(`book-${countBooks}`);
+  bookContainer.appendChild(contentContainer).classList.add(`left-side`);
+  contentContainer.appendChild(titleBook);
+  contentContainer.appendChild(authorBook);
+  contentContainer.appendChild(pagesBook);
+  contentContainer.appendChild(readBook);
+  bookContainer.appendChild(buttonContainer).classList.add(`right-side`);
+  buttonContainer.appendChild(deleteButton);
+  buttonContainer.appendChild(statusButton);
+  buttonContainer.appendChild(updateButton).classList.add(`book-${countBooks}`);
 
   deleteButton.textContent = "Delete";
   statusButton.textContent = "Change Status";
@@ -68,14 +72,16 @@ function createBookContainer(title, author, pages) {
   function deleteBook() {
     bookContainer.remove();
     countBooks -= 1;
-    let aux = document.getElementsByClassName("book-main");
+    let aux = document.getElementsByClassName("library-main");
     for (let node of aux[0].childNodes) {
       node.classList.remove(...node.classList);
       node.classList.add(
         `book-${Array.from(aux[0].childNodes).findIndex((e) => e == node) + 1}`
       );
-      node.childNodes[6].classList.remove(...node.childNodes[6].classList);
-      node.childNodes[6].classList.add(
+      node.childNodes[1].childNodes[2].classList.remove(
+        ...node.childNodes[1].childNodes[2].classList
+      );
+      node.childNodes[1].childNodes[2].classList.add(
         `book-${Array.from(aux[0].childNodes).findIndex((e) => e == node) + 1}`
       );
     }
@@ -90,8 +96,8 @@ function createBookContainer(title, author, pages) {
 }
 
 function addBookToLibrary(title, author, pages) {
-  title = titleValue.value;
-  author = authorValue.value;
+  title = capitalize(titleValue.value);
+  author = capitalize(authorValue.value);
   pages = pagesValue.value;
   myLibrary.push(new Book(title, author, pages));
   createBookContainer(title, author, pages);
@@ -135,7 +141,6 @@ window.addEventListener("click", function (e) {
 /*Update*/
 var submitButton = document.getElementById("submit");
 
-/*prueba = cambia las funciones que usará los click */
 submitButton.addEventListener("click", changeFunction);
 var classBook = "";
 
@@ -170,26 +175,37 @@ function changeFunction() {
 
 function update() {
   let getBookUpdate = document.getElementsByClassName(`${classBook}`);
-  getBookUpdate[0].childNodes[0].textContent = `Title: ${titleValue.value}`;
-  getBookUpdate[0].childNodes[1].textContent = `Author: ${authorValue.value}`;
-  getBookUpdate[0].childNodes[2].textContent = `Pages: ${pagesValue.value}`;
-  getBookUpdate[0].childNodes[3].textContent = `Status: ${statusRead.textContent}`;
+  getBookUpdate[0].childNodes[0].childNodes[0].textContent = `Title: ${capitalize(
+    titleValue.value
+  )}`;
+  getBookUpdate[0].childNodes[0].childNodes[1].textContent = `Author: ${capitalize(
+    authorValue.value
+  )}`;
+  getBookUpdate[0].childNodes[0].childNodes[2].textContent = `Pages: ${pagesValue.value}`;
+  getBookUpdate[0].childNodes[0].childNodes[3].textContent = `Status: ${statusRead.textContent}`;
   offModal();
 }
 
 function recoverData() {
   let getBookUpdate = document.getElementsByClassName(`${classBook}`);
-  let regex = /[^Title: |^Author: |^Pages: |^Status: ].+/g;
-  let stringTitle = getBookUpdate[0].childNodes[0].textContent;
-  let stringAuthor = getBookUpdate[0].childNodes[1].textContent;
-  let stringPages = getBookUpdate[0].childNodes[2].textContent;
-  let stringStatus = getBookUpdate[0].childNodes[3].textContent;
-  titleValue.value =
-    stringTitle.match(regex) == null ? "" : stringTitle.match(regex)[0];
-  authorValue.value =
-    stringAuthor.match(regex) == null ? "" : stringAuthor.match(regex)[0];
-  pagesValue.value =
-    stringPages.match(regex) == null ? "" : stringPages.match(regex)[0];
-  statusRead.textContent =
-    stringStatus.match(regex) == null ? "" : stringStatus.match(regex)[0];
+  let stringTitle = getBookUpdate[0].childNodes[0].childNodes[0].textContent;
+  let stringAuthor = getBookUpdate[0].childNodes[0].childNodes[1].textContent;
+  let stringPages = getBookUpdate[0].childNodes[0].childNodes[2].textContent;
+  let stringStatus = getBookUpdate[0].childNodes[0].childNodes[3].textContent;
+  titleValue.value = stringTitle.slice(7);
+  authorValue.value = stringAuthor.slice(8);
+  pagesValue.value = stringPages.slice(7);
+  statusRead.textContent = stringStatus.slice(8);
+}
+
+function capitalize(str) {
+  if (str == "") {
+    return "";
+  }
+  return str
+    .split(" ")
+    .map((word) => {
+      return word[0].toUpperCase() + word.substring(1);
+    })
+    .join(" ");
 }

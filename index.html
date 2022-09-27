@@ -6,16 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="node_modules/normalize.css/normalize.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap"
+      rel="stylesheet"
+    />
     <title>Document</title>
   </head>
   <body>
-    <h1>Library</h1>
+    <header>
+      <h1>Library</h1>
+      <img src="img/logo.png" alt="" />
+    </header>
     <div id="main-container">
-      <button class="button" onclick="onModal()">+</button>
-      <button class="button" onclick="deleteAll()">Delete All</button>
+      <div class="left-main">
+        <div>
+          <button class="button" onclick="onModal()">+</button>
+          <button class="button" onclick="deleteAll()">Delete All</button>
+        </div>
+        <img src="img/icon-2.png" alt="" />
+        <img src="img/icon.png" alt="" />
+      </div>
       <div class="modal-container">
         <div class="modal modal-close">
-          <button class="add" onclick="offModal()">x</button>
+          <button class="add button" onclick="offModal()">x</button>
           <form>
             <p>
               <label for="title">Title:</label>

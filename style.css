@@ -1,20 +1,126 @@
+* {
+  font-family: "Shadows Into Light", cursive;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 50px;
+  color: white;
+}
+
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 }
 
 #main-container {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  height: 90vh;
+  height: 80%;
 }
 
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  height: 15%;
+}
+
+header > img {
+  height: 80%;
+}
+
+.left-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 20%;
+  height: 100%;
+}
+
+.left-main > div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+img {
+  object-fit: cover;
+}
+
+.library-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  padding: 25px 15px;
+  gap: 15px;
+  width: 70%;
+  height: 90%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.library-main > div {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border: 3px solid rgb(255, 255, 255);
+  padding: 20px;
+  gap: 15px;
+  width: 95%;
+  height: 214px;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.left-side,
+.right-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+  color: white;
+}
+
+.right-side {
+  gap: 15px;
+}
+
+p {
+  font-family: "Comfortaa", cursive;
+}
+
+/*SCROLLBAR*/
+.library-main::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+
+.library-main::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f5f5f5;
+}
+
+.library-main::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #555;
+}
+
+/*MODAL*/
 .modal-container {
   display: flex;
   justify-content: center;
@@ -32,12 +138,13 @@ body {
 
 .modal {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  width: 25%;
-  height: 30%;
+  width: 30%;
+  height: 35%;
   overflow: hidden;
   background-color: #e6e3e3;
+  border-radius: 10px;
   transition: transform 1s;
   transform: translateY(0);
 }
@@ -46,30 +153,65 @@ body {
   transform: translateY(-300%);
 }
 
-[class^="book"] {
+/*FORM*/
+form {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
-  gap: 15px;
-  padding: 10px;
-  width: 20%;
-  height: 55%;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  width: 100%;
+  gap: 20px;
 }
 
-.book-main {
+form p {
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   flex-wrap: wrap;
-  border: 1px solid black;
-  padding: 15px;
-  gap: 15px;
-  width: 80%;
-  height: 90%;
-  overflow: auto;
+  align-items: center;
+  gap: 10px;
+  width: 70%;
 }
 
-/* CSS */
-.button {
+form label {
+  font-family: "Comfortaa", cursive;
+}
+
+form p:nth-child(4),
+form p:nth-child(5) {
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px;
+  width: 70%;
+}
+
+form p input {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 70%;
+}
+
+/* BUTTONS MODAL*/
+.add {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+
+#status,
+#submit {
+  width: 150px !important;
+  height: 30px !important;
+}
+
+/* BUTTONS LEFT */
+.button,
+#status,
+#submit {
   align-items: center;
   appearance: none;
   background-color: #fff;
@@ -105,49 +247,65 @@ body {
   z-index: 0;
 }
 
-.button:hover {
+.button:hover,
+#status:hover,
+#submit:hover {
   background: #f6f9fe;
   color: #174ea6;
 }
 
-.button:active {
+.button:active,
+#status:active,
+#submit:active {
   box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%),
     0 8px 12px 6px rgb(60 64 67 / 15%);
   outline: none;
 }
 
-.button:focus {
+.button:focus,
+#status:focus,
+#submit:focus {
   outline: none;
   border: 2px solid #4285f4;
 }
 
-.button:not(:disabled) {
+.button:not(:disabled),
+#status:not(:disabled),
+#submit:not(:disabled) {
   box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0,
     rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
 }
 
-.button:not(:disabled):hover {
+.button:not(:disabled):hover,
+#status:not(:disabled),
+#submit:not(:disabled) {
   box-shadow: rgba(60, 64, 67, 0.3) 0 2px 3px 0,
     rgba(60, 64, 67, 0.15) 0 6px 10px 4px;
 }
 
-.button:not(:disabled):focus {
+.button:not(:disabled):focus,
+#status:not(:disabled),
+#submit:not(:disabled) {
   box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0,
     rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
 }
 
-.button:not(:disabled):active {
+.button:not(:disabled):active,
+#status:not(:disabled),
+#submit:not(:disabled) {
   box-shadow: rgba(60, 64, 67, 0.3) 0 4px 4px 0,
     rgba(60, 64, 67, 0.15) 0 8px 12px 6px;
 }
 
-.button:disabled {
+.button:disabled,
+#status:disabled,
+#submit:disabled {
   box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0,
     rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
 }
 
-/* CSS */
-[class^="book"] > button {
+/* BUTTONS CONTAINER */
+.library-main > div > div:nth-child(2) > button {
   align-items: center !important;
   background-color: #fff !important;
   border: 2px solid #000 !important;
@@ -175,24 +333,23 @@ body {
   touch-action: manipulation !important;
 }
 
-[class^="book"] > button:focus {
+.library-main > div > div:nth-child(2) > button:focus {
   color: #171e29 !important;
 }
-
-[class^="book"] > button:hover {
+.library-main > div > div:nth-child(2) > button:hover {
   border-color: #06f !important;
   color: #06f !important;
   fill: #06f !important;
 }
 
-[class^="book"] > button:active {
+.library-main > div > div:nth-child(2) > button:active {
   border-color: #06f !important;
   color: #06f !important;
   fill: #06f !important;
 }
 
 @media (min-width: 768px) {
-  [class^="book"] > button {
+  .library-main > div > div:nth-child(2) > button {
     min-width: 170px !important;
   }
 }
