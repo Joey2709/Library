@@ -1,5 +1,6 @@
 * {
   font-family: "Shadows Into Light", cursive;
+  letter-spacing: 2px;
   margin: 0;
   padding: 0;
 }
@@ -143,7 +144,7 @@ p {
   width: 30%;
   height: 35%;
   overflow: hidden;
-  background-color: #e6e3e3;
+  background-image: linear-gradient(to top, #330867 0%, #30cfd0 100%);
   border-radius: 10px;
   transition: transform 1s;
   transform: translateY(0);
@@ -169,6 +170,7 @@ form p {
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
+  color: white;
   gap: 10px;
   width: 70%;
 }
