@@ -189,6 +189,7 @@ form p:nth-child(5) {
 form p input {
   display: flex;
   justify-content: space-between;
+  font-family: "Comfortaa", cursive !important;
   gap: 10px;
   width: 70%;
 }
